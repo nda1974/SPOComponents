@@ -4,24 +4,29 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneChoiceGroup
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'ManualSearchAppWebPartStrings';
-import ManualSearchApp from './components/ManualSearchApp';
-import { IManualSearchAppProps } from './components/IManualSearchAppProps';
+// import ManualSearchApp from './components/ManualSearchApp';
+// import { IManualSearchAppProps } from './components/IManualSearchAppProps';
+import App, { IAppProps } from './components/App/App';
 
 export interface IManualSearchAppWebPartProps {
   description: string;
+  manualType: string;
 }
 
 export default class ManualSearchAppWebPart extends BaseClientSideWebPart<IManualSearchAppWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IManualSearchAppProps > = React.createElement(
-      ManualSearchApp,
+    const element: React.ReactElement<IAppProps > = React.createElement(
+
+      App,
       {
-        description: this.properties.description
+        manualType: this.properties.manualType,
+        webPartContext:this.context
       }
     );
 
@@ -36,15 +41,21 @@ export default class ManualSearchAppWebPart extends BaseClientSideWebPart<IManua
     return {
       pages: [
         {
+        
           header: {
-            description: strings.PropertyPaneDescription
+            
+            description: "Vælg typen af håndbøger der skal vises" 
           },
           groups: [
             {
-              groupName: strings.BasicGroupName,
+              groupName: 'Håndbog',
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneChoiceGroup('manualType',{
+                  label:'Vælg type',
+                  options:[{ key: 'Baad', text: 'Båd'}, 
+                       { key: 'Bil', text: 'Bil' }, 
+                       { key: 'Hund', text: 'Hund' } 
+                  ]
                 })
               ]
             }
