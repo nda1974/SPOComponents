@@ -1,0 +1,8 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "version": "1.4.1",
+    "libraryName": "manual-search-app",
+    "libraryId": "54ee3c54-bd21-46d5-b22d-73ae2f0153aa",
+    "environment": "spo"
+  }
+}
