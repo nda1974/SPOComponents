@@ -67,7 +67,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
         public render(): React.ReactElement<IAppProps> {
             
             if(this.props.manualType==undefined){
-                return(<div>Fisk</div>);
+                return(<div>Rediger webparten ved at vælge håndbogstype</div>);
             }
 
             let ss: SPSearchService=new SPSearchService(this.props.webPartContext)

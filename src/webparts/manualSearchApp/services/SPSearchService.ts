@@ -39,73 +39,82 @@ export default class SPSearchService{
     // public static async search(queryText:string,refinementFilters:string[]):Promise<ISearchResults>{
         public async search(queryText:string,refinementFilters:string[],manualType:string):Promise<ISearchResults>{
             
-            
-            console.log('manualType '  +  manualType);
             if (manualType== 'undefined') {
                 return;
             }
-            
 
             let searchQuery: SearchQuery = {};
             let sortedRefiners: string[] = [];
-            
             let selectPropertyCategory:string = ""
             let filterOnContentType:string="";
             let refinersMappedProperties:string="";
             let searchQueryQueryText:string="";
-
-
-            let selectProperties:string[]=['Title','Author','IndboCategory','Path','RefinableString02'];
+            let selectProperties:string[];
 
 
             switch (manualType.toUpperCase()) {
                 case "BAAD":
-                    selectProperties=['Title','Author','BaadCategory','Path','RefinableString02','RefinableString02'];
+                    refinersMappedProperties= "BaadCategory";    
+                    selectProperties=['Title','Author',refinersMappedProperties,'Path','ContentType'];
                     filterOnContentType = "BaadManual";
-                    refinersMappedProperties= "refinablestring02,refinablestring04";
-                    if (refinementFilters.length>0) {
-                        
-                        searchQueryQueryText="ContentType:"+filterOnContentType+" AND " + queryText + " " +"RefinableString04:'" + refinementFilters[0] + "'";
-                        
-                    }else{
-                        searchQueryQueryText=="ContentType:"+filterOnContentType+" AND " + queryText; 
-                    }
-                    console.log(manualType.toUpperCase())
-                    break;
-                case "BIL":
-                    selectProperties=['Title','Author','BilCategory','Path','RefinableString04'];
-                    filterOnContentType = "BilManual";
-                    refinersMappedProperties= "refinablestring04";
-                    if (refinementFilters.length==1) {
-                        searchQueryQueryText="ContentType:"+filterOnContentType+" AND " + queryText + " " +"RefinableString04:'" + refinementFilters[0] + "'";
-                    }else{
-                        searchQueryQueryText=="ContentType:"+filterOnContentType+" AND " + queryText; 
-                    }
                     
-                    console.log(manualType.toUpperCase())
+
+                    // if (refinementFilters.length>0) {
+                    //     searchQueryQueryText="ContentType:"+filterOnContentType+" AND " + queryText + " " +"RefinableString04:'" + refinementFilters[0] + "'";
+                    // }
+                    // else{
+                    //     searchQueryQueryText=="ContentType:"+filterOnContentType+" AND " + queryText; 
+                    // }
                     break;
+
+                case "BIL":
+                    refinersMappedProperties= "BilCategory";    
+                    selectProperties=['Title','Author',refinersMappedProperties,'Path','ContentType'];
+                    filterOnContentType = "BilManual";
+                    
+                    
+                    // if (refinementFilters.length==1) {
+                    //     searchQueryQueryText="ContentType:"+filterOnContentType+" AND " + queryText + " " + refinersMappedProperties + ":" + refinementFilters[0];
+                    // }
+                    // else{
+                    //     searchQueryQueryText=="ContentType:"+filterOnContentType+" AND " + queryText; 
+                    // }
+                    
+                    break;
+
                 case "HUND":
-                console.log(manualType.toUpperCase())
-                    selectProperties=['Title','Author','HundCategory','Path','RefinableString02'];
+                    refinersMappedProperties= "HundCategory";    
+                    selectProperties=['Title','Author',refinersMappedProperties,'Path','ContentType'];
                     filterOnContentType = "HundManual";
+                    
+                    
+                    // if (refinementFilters.length==1) {
+                    //     searchQueryQueryText="ContentType:"+filterOnContentType+" AND " + queryText + " " + refinersMappedProperties + ":" + refinementFilters[0];
+                    // }
+                    // else{
+                    //     searchQueryQueryText=="ContentType:"+filterOnContentType+" AND " + queryText; 
+                    // }
+                    
                     break;
         
                 default:
                     break;
                     
             }
-            // let selectProperties:string[]=['Title','Author','AnsvarCategory','Path'];
+
+            
             let rf:string[]=[];
             if (refinementFilters.length==1) {
-                searchQuery.Querytext="ContentType:LB Manual AND " + queryText + " " +"LBManualCategory:'" + refinementFilters[0] + "'";
-                searchQuery.Querytext="ContentType:"+filterOnContentType+" AND " + queryText + " " +"RefinableString04:'" + refinementFilters[0] + "'";
-                searchQuery.Querytext=searchQueryQueryText;
+                // searchQuery.Querytext=searchQueryQueryText;
+                searchQuery.Querytext="ContentType:"+filterOnContentType+" AND " + queryText + " " + refinersMappedProperties + ":" + refinementFilters[0];
             }
             else
             {
-                searchQuery.Querytext="ContentType:LB Manual AND " + queryText;
                 searchQuery.Querytext="ContentType:"+filterOnContentType+" AND " + queryText;    
             }
+
+
+
             searchQuery.SelectProperties=selectProperties;
             searchQuery.Refiners=refinersMappedProperties;
             

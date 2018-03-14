@@ -37,46 +37,64 @@ export default class SearchResultContainer extends React.Component<ISearchResult
     
 
     public render(): React.ReactElement<ISearchResultContainerProps> {  
-        
+        var t:any;
         return(
             <div>
                 {this.props.results.map(function(item,key){ 
-                                             return (
-                                    
-                                                        <div  key={key} className="ms-Grid-row">  
-                                                                        <div >
-                                                                            <h2>
-                                                                                <Link href={item.Path}>{item.Title}</Link>
-                                                                            </h2>
-                                                                        </div>       
-                                                                           
-                                                                        <MessageBar
-                                                                            messageBarType={ MessageBarType.info }
-                                                                            isMultiline={ false }
-                                                                            >
-                                                                            {item.IndboCategory} 
-                                                                        </MessageBar>    
-                                                                        
-                                                                        {/* <MessageBar
-                                                                            messageBarType={ MessageBarType.severeWarning }
-                                                                            isMultiline={ false }
-                                                                            >
-                                                                            Ankenævnskendelse
-                                                                            
-                                                                        </MessageBar>     */}
-                                                                        <br/>
-                                                                        <div>
-                                                                            The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 
-                                                                            "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                     return (
+                                <div  key={key} className="ms-Grid-row">  
+                                                <div >
+                                                    <h2>
+                                                        <Link href={item.Path}>{item.Title}</Link>
+                                                    </h2>
+                                                </div>       
+                                                    
 
-                                                                        </div>      
-                                                                        <br/>
-                                                                        <TeachingBubbleBasicExample  text='Aenean id eros ut ante ultricies malesuada a vel erat. Donec a molestie nisl, non blandit enim. Mauris sit amet urna nisl. Nulla facilisi. Nullam laoreet auctor neque, sed vestibulum mi porta nec. Sed id augue a est commodo luctus non sit amet arcu. Vestibulum congue risus at mauris pharetra, eu fringilla arcu tincidunt. Aenean sed magna vitae sapien ultricies varius. Duis turpis dui, laoreet ac purus dictum, ornare aliquet tellus. Nulla eu sodales justo. Mauris sodales mauris quis justo tincidunt, eget dignissim risus venenatis.'    />
-                                                                        
-                                                        </div>
-                                                        
-                                                    )}
-                                                )}
+                                                    {(() => {
+                                                        switch (item.ContentType) {
+                                                            case "HundManual":   
+                                                                return <MessageBar  messageBarType={ MessageBarType.info }
+                                                                                    isMultiline={ false }>
+                                                                                        {item.HundCategory}
+                                                                        </MessageBar>;
+                                                            case "BaadManual":   
+                                                                return <MessageBar  messageBarType={ MessageBarType.info }
+                                                                                    isMultiline={ false }>
+                                                                                        {item.BaadCategory}
+                                                                        </MessageBar>;
+                                                            case "BilManual":   
+                                                                return <MessageBar  messageBarType={ MessageBarType.info }
+                                                                                    isMultiline={ false }>
+                                                                                        {item.BilCategory}
+                                                                        </MessageBar>;
+                                                                    
+                                                            default:      
+                                                                return "Ingen kategori angivet";
+                                                        }
+                                                    })()}
+                                                    
+                                                
+
+                                                {/* <MessageBar
+                                                    messageBarType={ MessageBarType.severeWarning }
+                                                    isMultiline={ false }
+                                                    >
+                                                    Ankenævnskendelse
+                                                    
+                                                </MessageBar>     */}
+                                                <br/>
+                                                <div>
+                                                    The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 
+                                                    "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+
+                                                </div>      
+                                                <br/>
+                                                <TeachingBubbleBasicExample  text='Aenean id eros ut ante ultricies malesuada a vel erat. Donec a molestie nisl, non blandit enim. Mauris sit amet urna nisl. Nulla facilisi. Nullam laoreet auctor neque, sed vestibulum mi porta nec. Sed id augue a est commodo luctus non sit amet arcu. Vestibulum congue risus at mauris pharetra, eu fringilla arcu tincidunt. Aenean sed magna vitae sapien ultricies varius. Duis turpis dui, laoreet ac purus dictum, ornare aliquet tellus. Nulla eu sodales justo. Mauris sodales mauris quis justo tincidunt, eget dignissim risus venenatis.'    />
+                                                
+                                </div>
+                                
+                            )}
+                        )}
             </div>
             
             
