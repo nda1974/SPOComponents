@@ -1,0 +1,39 @@
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+.Hide{
+    display: none;
+}
+.Show{
+    display: block;
+}
+.GroupBar:hover{
+    cursor: pointer;
+}
+.GroupBar i{
+    float: right;
+}
+.GroupBar{
+    @include ms-Grid-row;
+    background-color:rgb(0,50,98);
+    color: white;
+    width: 100%;
+    padding:10px;
+    @include ms-fontSize-l;
+    margin-bottom: 5px;
+    
+}
+// .ManualRow:hover{
+//     background-color:rgba(0,50,98,.2);
+//     color:white;
+// }
+.ManualRow a{
+    color:rgba(0,50,98,1);
+}
+.ManualRow{
+    @include ms-Grid-row;
+    padding:5px 5px 5px 5px;
+    margin-bottom: 2px;
+    background-color:rgba(0,50,98,.2);
+    
+    width: 100%;
+    @include ms-fontSize-m;
+}

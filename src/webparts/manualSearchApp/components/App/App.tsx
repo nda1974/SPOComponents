@@ -12,9 +12,11 @@ import RefinementPanel from '../RefinementPanel/RefinementPanel'
 export interface IAppProps {
     manualType: string;
     webPartContext:WebPartContext;
+    searchUrl:string;
   }
 
   export interface IAppState {
+    "compactMode":boolean,
     "queryText":string,
     "refinementFilters":string[],
     "results":ISearchResults
@@ -28,6 +30,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
             this.state = {
                         refinementFilters:[],
                         queryText:'',
+                        compactMode:false,
                         results: { 
                             RefinementResults: [], 
                             RelevantResults: [] 
@@ -39,12 +42,20 @@ export default class App extends React.Component<IAppProps, IAppState> {
                     // this.onChildChanged= this.onChildChanged.bind(this)
                     this.onQueryTextChanged= this.onQueryTextChanged.bind(this);
                     this.onRefinementFiltersChanged= this.onRefinementFiltersChanged.bind(this);
+                    this.onDisplayModeChanged= this.onDisplayModeChanged.bind(this);
                     
     }
                 
 
-                onQueryTextChanged(newState) {
-                this.setState({ queryText: newState })
+                onQueryTextChanged(newState?:string) {
+                    
+                    this.setState({ queryText: newState })
+                }
+                
+                onDisplayModeChanged(newState:boolean) {
+                    this.setState({ compactMode: newState })
+                    console.log(this.state.compactMode);
+                    
                 }
                 
                 onRefinementFiltersChanged(newState?:string) {
@@ -74,11 +85,8 @@ export default class App extends React.Component<IAppProps, IAppState> {
             
                 
 
-            let searchResult:Promise<ISearchResults>=ss.search(this.state.queryText,this.state.refinementFilters,this.props.manualType);
-            // let searchResult:Promise<ISearchResults>=SPSearchService.search(this.state.queryText,this.state.refinementFilters);
-            // searchResult.then(
-            //     (data:any)=>{this.setState({results:data})}
-            // );
+            let searchResult:Promise<ISearchResults>=ss.search(this.state.queryText + ' ' + this.props.searchUrl,this.state.refinementFilters,this.props.manualType);
+            
             let results: ISearchResults = {
                 RelevantResults : [],
                 RefinementResults: [],
@@ -96,7 +104,9 @@ export default class App extends React.Component<IAppProps, IAppState> {
                 <div className="ms-Grid-row">
                 
                     <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
-                        <SearchInputContainer  description='' callbackSetAppContainerQueryString={(newState) => this.onQueryTextChanged(newState) }/>
+                        <SearchInputContainer   callbackDisplayMode={(newState) => this.onDisplayModeChanged(newState)} 
+                                                callbackSetAppContainerQueryString={(newState) => this.onQueryTextChanged(newState) }/>
+                                                <br/><br/>
                     </div>
                 
                 
@@ -105,45 +115,20 @@ export default class App extends React.Component<IAppProps, IAppState> {
                 
                 <div className="ms-Grid-row">
                     <div className="ms-Grid-col ms-sm6">       
-                        {/* <RefinementPanel refiners={this.state.results.RefinementResults} refinementFilters={this.state.refinementFilters} callbackSetRefinementFilters={(newState) => this.onRefinementFiltersChanged(newState) }/> */}
-                        
-                        <RefinementPanel refiners={this.state.results.RefinementResults}  
+                        <RefinementPanel    refiners={this.state.results.RefinementResults}  
                                             callbackSetRefinementFilters={(newState) => this.onRefinementFiltersChanged(newState) }
                                             callbackClearRefinementFilters={() => this.onRefinementFiltersChanged(null) }/>
                     </div>
+
                     <div className="ms-Grid-col ms-sm6">
-                    <SearchResultContainer results={this.state.results.RelevantResults} />
+                        <SearchResultContainer  results={this.state.results.RelevantResults} 
+                                                showCompactMode={this.state.compactMode} />
                     </div>
                 
                 </div>
-{/* 
-                <div className="ms-Grid-row">
-                
-                    <div className="ms-Grid-col ms-sm12">
-                        <SearchResultContainer results={this.state.results.RelevantResults} />
-                    </div>
-                </div> */}
-
-
-
-
-
-            
                                     
-                    <p>This Query Text state {this.state.queryText}</p>
-                    <p>This Refinementfiltes state  {this.state.refinementFilters.map((item,key)=>item)}</p>
-                    
-                    
-                    
-                    
-                    
-                    {/* <SearchResultContainer results={res}/> */}
-
-                    
-
-
-                                
-
+                    {/* <p>Querytext state {this.state.queryText}</p>
+                    <p>DisplayMode state {this.state.compactMode}</p> */}
             </div>
             );
         }

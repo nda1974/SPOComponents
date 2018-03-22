@@ -66,15 +66,16 @@ export class TeachingBubbleBasicExample extends React.Component<ITeachingBubbleB
                 <div><h1>Afsnit 1</h1>
                 </div>
                 <div>{this.props.text}
+                  <Link href='http://dev.office.com/fabric/components/link'>Se afgørelse.</Link>
                 </div>
                 
-                <Link href='http://dev.office.com/fabric/components/link'>Se afgørelse.</Link>
+                
               
                 <h1>Afsnit 2</h1>                
-                <div>{this.props.text}</div>
+                <div>{this.props.text}
                 
-                <Link href='http://dev.office.com/fabric/components/link'>Se afgørelse.</Link>
-              
+                  <Link href='http://dev.office.com/fabric/components/link'>Se afgørelse.</Link>
+                </div>
             </TeachingBubble>
           </div>
         ) : (null) }

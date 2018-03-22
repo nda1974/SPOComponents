@@ -1,3 +1,4 @@
 export interface ISearchInputContainerState{  
-    "queryText":string
+    "queryText":string;
+    "compactMode":boolean;
 }

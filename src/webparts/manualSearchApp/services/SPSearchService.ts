@@ -16,6 +16,9 @@ export default class SPSearchService{
         //refinablestring03 = BaadArea
         //refinablestring04 = BilCategory
 
+        //refinablestring05 = IndboCategory
+        //refinablestring06 = IndboArea
+
 
         // Setup the PnP JS instance
         const consoleListener = new ConsoleListener();
@@ -96,6 +99,12 @@ export default class SPSearchService{
                     // }
                     
                     break;
+                    case "INDBO":
+                    refinersMappedProperties= "IndboCategory";    
+                    selectProperties=['Title','Author',refinersMappedProperties,'Path','ContentType','LBInfo','LBTeaser','HitHighlightedSummary'];
+                    filterOnContentType = "IndboManual";
+                    
+                    break;
         
                 default:
                     break;
@@ -134,7 +143,7 @@ export default class SPSearchService{
                             
                 // Be careful, there was an issue with paging calculation under 2.0.8 version of sp-pnp-js library
                 // More info https://github.com/SharePoint/PnP-JS-Core/issues/535
-                const r2 = await r.getPage(1,10);
+                const r2 = await r.getPage(1,100);
                 const resultRows = r2.RawSearchResults.PrimaryQueryResult.RelevantResults.Table.Rows;
                 let refinementResultsRows = r2.RawSearchResults.PrimaryQueryResult.RefinementResults;
         

@@ -16,6 +16,7 @@ import App, { IAppProps } from './components/App/App';
 export interface IManualSearchAppWebPartProps {
   description: string;
   manualType: string;
+  searchUrl:string;
 }
 
 export default class ManualSearchAppWebPart extends BaseClientSideWebPart<IManualSearchAppWebPartProps> {
@@ -26,7 +27,8 @@ export default class ManualSearchAppWebPart extends BaseClientSideWebPart<IManua
       App,
       {
         manualType: this.properties.manualType,
-        webPartContext:this.context
+        webPartContext:this.context,
+        searchUrl:this.properties.searchUrl
       }
     );
 
@@ -54,8 +56,12 @@ export default class ManualSearchAppWebPart extends BaseClientSideWebPart<IManua
                   label:'Vælg type',
                   options:[{ key: 'Baad', text: 'Båd'}, 
                        { key: 'Bil', text: 'Bil' }, 
+                       { key: 'Indbo', text: 'Indbo' },
                        { key: 'Hund', text: 'Hund' } 
                   ]
+                }),
+                PropertyPaneTextField('searchUrl',{
+                  label:'Indtast site scope'
                 })
               ]
             }

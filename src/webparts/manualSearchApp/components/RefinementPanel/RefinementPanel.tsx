@@ -10,20 +10,20 @@ import { SPComponentLoader } from '@microsoft/sp-loader';
 export default class RefinementPanel extends React.Component<IRefinementPanelProps, IRefinementPanelState> {
     
     
-    public constructor(props:IRefinementPanelProps, state:IRefinementPanelState){  
-            super(props);  
-            
-            this.state = {
-                        refinementFilters:[]
-                        };  
+    public constructor(props:IRefinementPanelProps, state:IRefinementPanelState){  
+        super(props);  
+        
+        this.state = {
+                    refinementFilters:[]
+                    };  
 
-                    this.callbackSetRefinementFilters= this.callbackSetRefinementFilters.bind(this)
-    }
-              
-                
-                callbackSetRefinementFilters(newState) {
-                this.setState({ refinementFilters: newState })
-                }
+                this.callbackSetRefinementFilters= this.callbackSetRefinementFilters.bind(this)
+}
+          
+            
+            private callbackSetRefinementFilters(newState):void {
+            this.setState({ refinementFilters: newState })
+            }
             
                 public render(): React.ReactElement<IRefinementPanelProps> {  
                     
