@@ -9,23 +9,25 @@ import { Callout } from 'office-ui-fabric-react/lib/Callout';
 import styles from './TeachingBubbleBasicExample.module.scss'
 // import { style } from 'glamor';
 export interface ITeachingBubbleBasicExampleState {
-  isTeachingBubbleVisible?: boolean;
-  
+    isTeachingBubbleVisible?: boolean;
+    
 }
-export interface ITeachingBubbleBasicExampleState{
-    text?:string;
+export interface ITeachingBubbleBasicExampleProps{
+  text?:string;
+  text2?:string;
+  targetUrl:string;
 }
-export class TeachingBubbleBasicExample extends React.Component<ITeachingBubbleBasicExampleState, ITeachingBubbleBasicExampleState> {
+
+export class TeachingBubbleBasicExample extends React.Component<ITeachingBubbleBasicExampleProps,ITeachingBubbleBasicExampleState> {
   private _menuButtonElement: HTMLElement;
 
-  constructor(props: {}) {
+  constructor(props: ITeachingBubbleBasicExampleProps,state: ITeachingBubbleBasicExampleState) {
     super(props);
 
     this._onDismiss = this._onDismiss.bind(this);
 
     this.state = {
       isTeachingBubbleVisible: false,
-      text:'',
     };
   }
 
@@ -33,7 +35,7 @@ export class TeachingBubbleBasicExample extends React.Component<ITeachingBubbleB
     let { isTeachingBubbleVisible } = this.state;
     let examplePrimaryButton: IButtonProps = {
       children: 'Åbn vilkår',
-      href:'http://www.dr.dk',
+      href:this.props.targetUrl,
       target:'_blank'
       
     };
@@ -63,18 +65,18 @@ export class TeachingBubbleBasicExample extends React.Component<ITeachingBubbleB
             >
 
 
-                <div><h1>Afsnit 1</h1>
+                <div><h1>Teaser</h1>
                 </div>
                 <div>{this.props.text}
-                  <Link href='http://dev.office.com/fabric/components/link'>Se afgørelse.</Link>
+                  {/* <Link href='http://dev.office.com/fabric/components/link'>Se afgørelse.</Link> */}
                 </div>
                 
                 
               
-                <h1>Afsnit 2</h1>                
-                <div>{this.props.text}
+                <h1>Info</h1>                
+                <div>{this.props.text2}
                 
-                  <Link href='http://dev.office.com/fabric/components/link'>Se afgørelse.</Link>
+                  {/* <Link href='http://dev.office.com/fabric/components/link'>Se afgørelse.</Link> */}
                 </div>
             </TeachingBubble>
           </div>

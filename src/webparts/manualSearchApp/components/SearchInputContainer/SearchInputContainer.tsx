@@ -7,6 +7,7 @@ import App from '../App/App'
 import {ISearchInputContainerProps} from '../SearchInputContainer/ISearchInputContainerProps'
 import {ISearchInputContainerState} from '../SearchInputContainer/ISearchInputContainerState'
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
+import styles from './SearchInputContainer.module.scss'
 export default class SearchInputContainer extends React.Component<ISearchInputContainerProps, ISearchInputContainerState> {
     
     public constructor(props:ISearchInputContainerProps, state:ISearchInputContainerState){  
@@ -29,11 +30,10 @@ export default class SearchInputContainer extends React.Component<ISearchInputCo
                         /> */}
 
                         <SearchBox
-                        
-                            placeholder='Search.....'
+                            placeholder='Søg'
                             onSearch={ (newValue:string) => {this._search(newValue)} }
-
                         />
+                        <label className={styles.SearchInputLabel}>Tryk Enter 2 gange for at udføre søgning. Tryk * for at nulstille søgningen</label>
 
 
 

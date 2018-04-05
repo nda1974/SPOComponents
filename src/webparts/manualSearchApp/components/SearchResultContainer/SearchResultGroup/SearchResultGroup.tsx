@@ -37,8 +37,8 @@ export default class SearchResultGroup extends React.Component<ISearchResultGrou
     public render(): React.ReactElement<ISearchResultGroupProps> {  
         const group = this.props.manuals;      
         const showCompactMode = true;  
-        return(<div onClick = {this.updateState}>
-            <div className= {styles.GroupBar}>{this.props.groupName.length>0?this.props.groupName:'Uden kategori'}<i className={this.state.show==true? "ms-Icon ms-Icon--ChevronUp":"ms-Icon ms-Icon--ChevronDown"} aria-hidden="true"></i></div>
+        return(<div >
+            <div onClick = {this.updateState} className= {styles.GroupBar}>{this.props.groupName.length>0?this.props.groupName:'Uden kategori'}<i className={this.state.show==true? "ms-Icon ms-Icon--ChevronUp":"ms-Icon ms-Icon--ChevronDown"} aria-hidden="true"></i></div>
             
             <div className= {this.state.show==true? styles.Show:styles.Hide}>
             
@@ -66,8 +66,18 @@ export default class SearchResultGroup extends React.Component<ISearchResultGrou
                                 <Link href={group[manual].Path}>{group[manual].Title}</Link>:
                                 <div>
                                 <h4>{group[manual].Title}</h4>
+                                <div>{group[manual].LBInfo}</div>
+                                <div>{group[manual].LBTeaser}</div>
                                 <p>Integer non dignissim diam. Suspendisse sed imperdiet lectus. Etiam facilisis interdum risus vel varius. Integer quis felis mauris. Nam sed efficitur arcu. Proin ut cursus orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam tristique justo id pharetra euismod. Nam eu vehicula dui. Donec sed lectus ut est molestie varius eu sit amet metus. Donec a aliquam felis. Nullam id rhoncus ex, nec finibus est. Proin eu tempor metus, eu faucibus risus. Nullam interdum nisl a felis luctus, in dapibus lorem luctus.</p>
-                                <TeachingBubbleBasicExample  text='Aenean id eros ut ante ultricies malesuada a vel erat. Donec a molestie nisl, non blandit enim. Mauris sit amet urna nisl. Nulla facilisi. Nullam laoreet auctor neque, sed vestibulum mi porta nec. Sed id augue a est commodo luctus non sit amet arcu. Vestibulum congue risus at mauris pharetra, eu fringilla arcu tincidunt. Aenean sed magna vitae sapien ultricies varius. Duis turpis dui, laoreet ac purus dictum, ornare aliquet tellus. Nulla eu sodales justo. Mauris sodales mauris quis justo tincidunt, eget dignissim risus venenatis.'    />
+                                {/* <TeachingBubbleBasicExample  text='Aenean id eros ut ante ultricies malesuada a vel erat. Donec a molestie nisl, non blandit enim. Mauris sit amet urna nisl. Nulla facilisi. Nullam laoreet auctor neque, sed vestibulum mi porta nec. Sed id augue a est commodo luctus non sit amet arcu. Vestibulum congue risus at mauris pharetra, eu fringilla arcu tincidunt. Aenean sed magna vitae sapien ultricies varius. Duis turpis dui, laoreet ac purus dictum, ornare aliquet tellus. Nulla eu sodales justo. Mauris sodales mauris quis justo tincidunt, eget dignissim risus venenatis.'    /> */}
+                                {
+                                    
+                                    group[manual].LBTeaser!=null && group[manual].LBInfo!=null?
+                                        group[manual].LBTeaser.length>0 && group[manual].LBInfo.length>0?
+                                            <TeachingBubbleBasicExample targetUrl={group[manual].OriginalPath}  text={group[manual].LBTeaser} text2={group[manual].LBInfo}    />:null
+                                            :null
+                                }
+                                
                                 </div>
 
                             }
