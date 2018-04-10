@@ -15,7 +15,7 @@
 }
 .ManualRow{
     @include ms-Grid-row;
-    padding:5px;
+    padding:10px;
     width: 100%;
     @include ms-fontSize-m;
 }

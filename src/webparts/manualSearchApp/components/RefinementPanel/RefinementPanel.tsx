@@ -28,11 +28,12 @@ export default class RefinementPanel extends React.Component<IRefinementPanelPro
                 public render(): React.ReactElement<IRefinementPanelProps> {  
                     
                     return(
-                        <div className={styles.RefinementPanel}>
-                        <div className={"ms-Grid"}>
+                        
+                        <div className="ms-Grid">
                         <div className="ms-Grid-row">           
                             <div  className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
                                     <DefaultButton
+                                                className={styles.refinerBtn}
                                                 data-automation-id='test'
                                                 text='Ryd filter'
                                                 value='asdf'
@@ -41,7 +42,8 @@ export default class RefinementPanel extends React.Component<IRefinementPanelPro
                                 </div>
                             </div>
                             
-                        {/* {this.props.refiners.sort((a,b)=>a.FilterName.localeCompare(b.FilterName))}    */}
+                        
+
                         {this.props.refiners.map((item,key)=>(  
                             // item.Values.map((i,k)=>(   
                                 item.Values.sort((a,b)=>a.RefinementName.localeCompare(b.RefinementName)).map((i,k)=>(
@@ -70,7 +72,7 @@ export default class RefinementPanel extends React.Component<IRefinementPanelPro
                             
 
                         </div>
-</div>
+
                         
                        
                     );

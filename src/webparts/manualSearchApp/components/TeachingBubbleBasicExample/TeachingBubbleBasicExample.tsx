@@ -14,8 +14,11 @@ export interface ITeachingBubbleBasicExampleState {
 }
 export interface ITeachingBubbleBasicExampleProps{
   text?:string;
-  text2?:string;
   targetUrl:string;
+  showButtonLabel:string;
+  hideButtonLabel:string;
+  headLine:string;
+  iconName:string;
 }
 
 export class TeachingBubbleBasicExample extends React.Component<ITeachingBubbleBasicExampleProps,ITeachingBubbleBasicExampleState> {
@@ -46,38 +49,31 @@ export class TeachingBubbleBasicExample extends React.Component<ITeachingBubbleB
     };
 
     return (
-      <div className='ms-TeachingBubbleExample'>
-        <span className='ms-TeachingBubbleBasicExample-buttonArea' ref={ (menuButton) => this._menuButtonElement = menuButton! }>
+      <div className='ms-Grid-col'>
+        <span className={styles.TeachingBubbleButton} ref={ (menuButton) => this._menuButtonElement = menuButton! }>
           <DefaultButton
+          className={styles.TeachingBubbleButton}
             onClick={ this._onDismiss }
-            text={ isTeachingBubbleVisible ? 'Skjul' : 'Vis mere..' }
-            
+            text={ isTeachingBubbleVisible ? this.props.hideButtonLabel : this.props.showButtonLabel }
+            iconProps={{ iconName: this.props.iconName }}
           />
         </span>
         { isTeachingBubbleVisible ? (
-          <div className={styles.MyWidth}>
-            <TeachingBubble 
+          <div className={styles.MyWidth}  >
+            <TeachingBubble
               targetElement={ this._menuButtonElement }
               primaryButtonProps={ examplePrimaryButton }
               secondaryButtonProps={ exampleSecondaryButtonProps }
               onDismiss={ this._onDismiss }
-              headline='Information omkring det aktuelle vilkår'
+              headline={this.props.headLine}
             >
 
-
-                <div><h1>Teaser</h1>
-                </div>
+                
                 <div>{this.props.text}
                   {/* <Link href='http://dev.office.com/fabric/components/link'>Se afgørelse.</Link> */}
                 </div>
                 
                 
-              
-                <h1>Info</h1>                
-                <div>{this.props.text2}
-                
-                  {/* <Link href='http://dev.office.com/fabric/components/link'>Se afgørelse.</Link> */}
-                </div>
             </TeachingBubble>
           </div>
         ) : (null) }

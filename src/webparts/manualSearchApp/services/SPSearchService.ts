@@ -101,7 +101,7 @@ export default class SPSearchService{
                     break;
                     case "INDBO":
                     refinersMappedProperties= "IndboCategory";    
-                    selectProperties=['Title','Author',refinersMappedProperties,'Path','ContentType','LBInfo','LBTeaser','HitHighlightedSummary'];
+                    selectProperties=['Title','Author',refinersMappedProperties,'Path','ContentType','LBInfo','LBTeaser','LBVerdicts','HitHighlightedSummary'];
                     filterOnContentType = "IndboManual";
                     
                     break;

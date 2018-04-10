@@ -58,28 +58,80 @@ export default class SearchResultGroup extends React.Component<ISearchResultGrou
                 
             {
             
-                
+        
             Object.keys(group).map((manual)=>{
+                var showTeaserRow=false;
+                var showAdditionalInfoRow=false;
+                
+
+                if(group[manual].LBTeaser!=null){
+                    if(group[manual].LBTeaser.length>0){
+                        showTeaserRow=true;
+                    }    
+                }
+
+                if(group[manual].LBInfo!=null){
+                    if(group[manual].LBInfo.length>0){
+                        showAdditionalInfoRow=true;
+                    }    
+                }
+
+                if(group[manual].LBVerdicts!=null){
+                    if(group[manual].LBVerdicts.length>0){
+                        showAdditionalInfoRow=true;
+                    }    
+                }
                 return <div className={styles.ManualRow}>
                             {
                                 this.props.displayCompactMode==true?
                                 <Link href={group[manual].Path}>{group[manual].Title}</Link>:
                                 <div>
-                                <h4>{group[manual].Title}</h4>
-                                <div>{group[manual].LBInfo}</div>
-                                <div>{group[manual].LBTeaser}</div>
-                                <p>Integer non dignissim diam. Suspendisse sed imperdiet lectus. Etiam facilisis interdum risus vel varius. Integer quis felis mauris. Nam sed efficitur arcu. Proin ut cursus orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam tristique justo id pharetra euismod. Nam eu vehicula dui. Donec sed lectus ut est molestie varius eu sit amet metus. Donec a aliquam felis. Nullam id rhoncus ex, nec finibus est. Proin eu tempor metus, eu faucibus risus. Nullam interdum nisl a felis luctus, in dapibus lorem luctus.</p>
-                                {/* <TeachingBubbleBasicExample  text='Aenean id eros ut ante ultricies malesuada a vel erat. Donec a molestie nisl, non blandit enim. Mauris sit amet urna nisl. Nulla facilisi. Nullam laoreet auctor neque, sed vestibulum mi porta nec. Sed id augue a est commodo luctus non sit amet arcu. Vestibulum congue risus at mauris pharetra, eu fringilla arcu tincidunt. Aenean sed magna vitae sapien ultricies varius. Duis turpis dui, laoreet ac purus dictum, ornare aliquet tellus. Nulla eu sodales justo. Mauris sodales mauris quis justo tincidunt, eget dignissim risus venenatis.'    /> */}
-                                {
-                                    
-                                    group[manual].LBTeaser!=null && group[manual].LBInfo!=null?
-                                        group[manual].LBTeaser.length>0 && group[manual].LBInfo.length>0?
-                                            <TeachingBubbleBasicExample targetUrl={group[manual].OriginalPath}  text={group[manual].LBTeaser} text2={group[manual].LBInfo}    />:null
-                                            :null
+                                <h4><Link href={group[manual].Path}>{group[manual].Title}</Link></h4>
+                                {showTeaserRow==true?<div>{group[manual].LBTeaser}</div>:null}
+                                
+                                {showAdditionalInfoRow==true?
+                                      <div className="ms-Grid-row">
+                                      
+                                      <br/>
+                                      {/* <p>Integer non dignissim diam. Suspendisse sed imperdiet lectus. Etiam facilisis interdum risus vel varius. Integer quis felis mauris. Nam sed efficitur arcu. Proin ut cursus orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam tristique justo id pharetra euismod. Nam eu vehicula dui. Donec sed lectus ut est molestie varius eu sit amet metus. Donec a aliquam felis. Nullam id rhoncus ex, nec finibus est. Proin eu tempor metus, eu faucibus risus. Nullam interdum nisl a felis luctus, in dapibus lorem luctus.</p> */}
+                                      {/* <TeachingBubbleBasicExample  text='Aenean id eros ut ante ultricies malesuada a vel erat. Donec a molestie nisl, non blandit enim. Mauris sit amet urna nisl. Nulla facilisi. Nullam laoreet auctor neque, sed vestibulum mi porta nec. Sed id augue a est commodo luctus non sit amet arcu. Vestibulum congue risus at mauris pharetra, eu fringilla arcu tincidunt. Aenean sed magna vitae sapien ultricies varius. Duis turpis dui, laoreet ac purus dictum, ornare aliquet tellus. Nulla eu sodales justo. Mauris sodales mauris quis justo tincidunt, eget dignissim risus venenatis.'    /> */}
+                                      {
+                                          
+                                          group[manual].LBInfo!=null?
+                                              group[manual].LBInfo.length>0?
+                                                  <TeachingBubbleBasicExample targetUrl={group[manual].OriginalPath}  
+                                                                              text={group[manual].LBInfo} 
+                                                                              showButtonLabel="Info" 
+                                                                              hideButtonLabel="Skjul"   
+                                                                              headLine="Info"
+                                                                              iconName="Info"    />:null
+                                                  :null
+                                                  
+                                                  
+                                      }
+                                      {
+                                          
+                                          group[manual].LBVerdicts!=null?
+                                              group[manual].LBVerdicts.length>0?
+                                                  <TeachingBubbleBasicExample targetUrl={group[manual].OriginalPath}
+                                                                              text={group[manual].LBVerdicts} 
+                                                                              showButtonLabel="Vis kendelser" 
+                                                                              hideButtonLabel="Skjul"  
+                                                                              headLine="Kendelser"
+                                                                              iconName="Articles"
+                                                                               />:null
+                                                  :null
+                                                  
+                                                  
+                                      }
+                                      </div>  
+                                :null
                                 }
+
+                                
                                 
                                 </div>
-
+                                
                             }
                         </div>
             })
