@@ -94,70 +94,11 @@ export default class SearchResultContainer extends React.Component<ISearchResult
             <div className="ms-Grid-row">
             
                 {
-                    // Object.keys(groupedManuals).map((groupKey,i)=>{
                     arrGroupKeys.map((groupKey)=>{
-                        
-                        // console.log(groupKey)
-                        // console.log(i)
                     const group = groupedManuals[groupKey];
                     
-                    // {  group.sort((a,b)=>a.key.localeCompare(b.key)) }
-                    // { groupKey.length>1 ? group.sort((a,b)=>a.Title.localeCompare(b.Title)) : groupKey='Ingen kategori angivet' }
-                    
-                    return <div className="ms-Grid-row">
-                    
-                    <SearchResultGroup groupName={groupKey} manuals={group} displayCompactMode={showCompactMode} ></SearchResultGroup>    
-                    
-                        {/* {(() => {
-                                if (showCompactMode==true) {
-                                    // return  <MessageBar messageBarType={MessageBarType.info} isMultiline={false}>
-                                    // {groupKey}
-                                    // </MessageBar>       
-                                    return  <div className="ms-Grid-col">
-                                                <div className= {styles.GroupBar}>{groupKey}</div>
-                                            </div>  
-                                }
-                            })()}
-                     */}
-                                {/* <div className="ms-Grid-row">
-                                    <p>{groupKey}</p>
-                                    <div className= {styles.GroupBar}>{groupKey}</div>
-                                </div> */}
-                                {/* <div className= {styles.GroupBar}>{groupKey}</div> */}
-                            
-                            {
-
-
-                                // Object.keys(group).map((manual)=>{
-                                // return <div  className={styles.ManualRow}>  
-                                //     {(() => {
-                                //                     if (showCompactMode==false) {
-                                //                         return  <div >
-                                //                                     <div>
-                                //                                         <h4>
-                                //                                             <Link href={group[manual].Path}>{group[manual].Title}</Link>
-                                //                                         </h4>
-                                //                                     </div>     
-                                //                                     <div>{group[manual].HitHighlightedSummary}</div>
-                                //                                     <div>
-                                //                                     </div>  
-                                                                    
-                                //                                     <div>       
-                                //                                         {InsertMessageBar(group[manual])}
-                                //                                             <TeachingBubbleBasicExample  text='Aenean id eros ut ante ultricies malesuada a vel erat. Donec a molestie nisl, non blandit enim. Mauris sit amet urna nisl. Nulla facilisi. Nullam laoreet auctor neque, sed vestibulum mi porta nec. Sed id augue a est commodo luctus non sit amet arcu. Vestibulum congue risus at mauris pharetra, eu fringilla arcu tincidunt. Aenean sed magna vitae sapien ultricies varius. Duis turpis dui, laoreet ac purus dictum, ornare aliquet tellus. Nulla eu sodales justo. Mauris sodales mauris quis justo tincidunt, eget dignissim risus venenatis.'    />
-                                //                                     </div>       
-                                //                                 </div>       
-                                //                     }
-                                //                     else{
-                                //                         return <div >
-                                //                                     <Link href={group[manual].Path}>{group[manual].Title}</Link>
-                                //                                 </div>
-                                //                     }
-
-                                //                 })()}
-                                //             </div>
-                                            }  
-                            
+                    return  <div className="ms-Grid-row">
+                                <SearchResultGroup groupName={groupKey} manuals={group} displayCompactMode={showCompactMode} ></SearchResultGroup>    
                             </div>
                 })}
             
@@ -186,26 +127,6 @@ export default class SearchResultContainer extends React.Component<ISearchResult
   }
 
 
-//     items.map(
-//         function(item,key){ 
-//                 return (
-//                         <div  key={key} className="ms-Grid-row">  
-//                             {(() => {
-//                                     return  <div>
-//                                                 <h2>
-//                                                     <Link href={item.Path}>{item.Title}</Link>
-//                                                 </h2>
-                                            
-
-//                                                 {InsertMessageBar(item)}
-//                                                         <TeachingBubbleBasicExample  text='Aenean id eros ut ante ultricies malesuada a vel erat. Donec a molestie nisl, non blandit enim. Mauris sit amet urna nisl. Nulla facilisi. Nullam laoreet auctor neque, sed vestibulum mi porta nec. Sed id augue a est commodo luctus non sit amet arcu. Vestibulum congue risus at mauris pharetra, eu fringilla arcu tincidunt. Aenean sed magna vitae sapien ultricies varius. Duis turpis dui, laoreet ac purus dictum, ornare aliquet tellus. Nulla eu sodales justo. Mauris sodales mauris quis justo tincidunt, eget dignissim risus venenatis.'    />
-//                                             </div>       
-
-//                             })()}
-//                         </div>
-//                     )
-//         }
-//     )
         
 function _myRender(groupedManuals:any):any {  
 

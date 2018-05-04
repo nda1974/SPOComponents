@@ -1,3 +1,4 @@
+//"id": "54ee3c54-bd21-46d5-b22d-73ae2f0153aa"
 import * as React from "react";
 import * as ReactDom from 'react-dom';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
@@ -39,7 +40,7 @@ export default class SearchInputContainer extends React.Component<ISearchInputCo
 
                          
                     </div>
-                    <div className="ms-Grid-col ms-sm6 ms-md4 ms-lg2">
+                    {/* <div className="ms-Grid-col ms-sm6 ms-md4 ms-lg2">
                     <Toggle
                             defaultChecked={ false }
                             label=''
@@ -48,7 +49,7 @@ export default class SearchInputContainer extends React.Component<ISearchInputCo
                             onChanged={ (newValue:boolean) => {this._toggleChanged(newValue)} }
                             // onChanged={ (newValue:boolean) => {this.setState({compactMode: newValue});this._toggleChanged()} }
                             />
-                    </div>
+                    </div> */}
                     
                 </div>
 

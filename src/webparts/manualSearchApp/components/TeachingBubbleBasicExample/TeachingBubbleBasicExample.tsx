@@ -70,6 +70,7 @@ export class TeachingBubbleBasicExample extends React.Component<ITeachingBubbleB
 
                 
                 <div>{this.props.text}
+                
                   {/* <Link href='http://dev.office.com/fabric/components/link'>Se afgørelse.</Link> */}
                 </div>
                 

@@ -27,13 +27,15 @@ export default class SPSearchService{
         // To limit the payload size, we set odata=nometadata
         // We just need to get list items here
         // We also set the SPFx context accordingly (https://github.com/SharePoint/PnP-JS-Core/wiki/Using-sp-pnp-js-in-SharePoint-Framework)
+        
         setup({
             sp: {
                 headers: {
-                    Accept: "application/json; odata=nometadata",
+                    Accept: "application/json; odata=nometadata"
                 },
+                baseUrl:"https://lbforsikring.sharepoint.com/sites/skade"
             },
-            spfxContext: this._context,
+            // spfxContext: this._context,
         });
     }
 
@@ -101,8 +103,12 @@ export default class SPSearchService{
                     break;
                     case "INDBO":
                     refinersMappedProperties= "IndboCategory";    
-                    selectProperties=['Title','Author',refinersMappedProperties,'Path','ContentType','LBInfo','LBTeaser','LBVerdicts','HitHighlightedSummary'];
+                    selectProperties=['Title','Author',refinersMappedProperties,'Path','ContentType','LBInfo','LBTeaser','LBVerdicts','HitHighlightedSummary','Verdicts'];
                     filterOnContentType = "IndboManual";
+                    
+                    // pnp.sp.web.lists.getByTitle("SitePages").items.getById(2273).select("Title", "Lookup/Title", "Lookup/ID").expand("Lookup").get().then((item: any) => {
+                    //     console.log(item);
+                    // });
                     
                     break;
         
@@ -120,6 +126,8 @@ export default class SPSearchService{
             else
             {
                 searchQuery.Querytext="ContentType:"+filterOnContentType+" AND " + queryText;    
+                
+                
             }
 
 
@@ -129,10 +137,19 @@ export default class SPSearchService{
             
             
             const r = await pnp.sp.search(searchQuery);
-            
+            // pnp.sp.web.lists.getByTitle("SitePages").items.getById(2273).select("Title", "Lookup/Title", "Lookup/ID").expand("Lookup").get().then((item: any) => {
+            //     console.log(item);
+            // });
             const allItemsPromises: Promise<ISearchResult>[] = [];
             let refinementResults: IRefinementResult[] = [];
             
+            // pnp.sp.web.lists.getByTitle("Ankenævnskendelser").items.get().then((items: any[]) => {
+            //     console.log(items);
+                
+            // });
+            
+
+
             // const allItemsPromises: Promise<ISearchResult>[] = [];
             let results: ISearchResults = {
               RelevantResults : [],
@@ -144,7 +161,9 @@ export default class SPSearchService{
                 // Be careful, there was an issue with paging calculation under 2.0.8 version of sp-pnp-js library
                 // More info https://github.com/SharePoint/PnP-JS-Core/issues/535
                 const r2 = await r.getPage(1,100);
+                
                 const resultRows = r2.RawSearchResults.PrimaryQueryResult.RelevantResults.Table.Rows;
+                console.log (resultRows);
                 let refinementResultsRows = r2.RawSearchResults.PrimaryQueryResult.RefinementResults;
         
                 const refinementRows = refinementResultsRows ? refinementResultsRows["Refiners"] : [];

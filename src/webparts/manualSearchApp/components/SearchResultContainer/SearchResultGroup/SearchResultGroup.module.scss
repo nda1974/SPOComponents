@@ -33,19 +33,25 @@ $white: "[theme:white, default:#fff]";
     margin-bottom: 5px;
     
 }
-// .ManualRow:hover{
-//     background-color:rgba(0,50,98,.2);
-//     color:white;
-// }
+
 .ManualRow a{
     color:rgba(0,50,98,1);
+    @include ms-fontSize-l;
 }
 .ManualRow{
     @include ms-Grid-row;
-    padding:0px 10px 10px 10px;
+    padding:5px 10px 5px 10px;
     margin-bottom: 2px;
-    background-color:$themeLight;
+    
     
     width: 100%;
     @include ms-fontSize-m;
+    border-bottom-color: $themePrimary;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
 }
+.ManualRow:hover{
+    background-color:rgba(0,50,98,.2);
+    color:white;
+}
+

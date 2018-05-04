@@ -1,8 +1,9 @@
+
 {
   "$schema": "https://dev.office.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "manual-search-app-client-side-solution",
-    "id": "54ee3c54-bd21-46d5-b22d-73ae2f0153aa",
+    "name": "LBForsikring-Manuals",
+    "id": "70ba1e20-b87e-409b-b705-281ab397ed91",
     "version": "1.0.0.0",
     "includeClientSideAssets": true
   },
